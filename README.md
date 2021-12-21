@@ -49,43 +49,39 @@ The idea can be summarized as follows:
 The following pseudocode will explain the memory generation process using layered indirection on the memory array `mem[]`.  
 When the single layer of indirection is used, it refers to setting an array element to a desired value for an operation. When two or more layers are used, this is done to allow `pc` to update to the desirable array index to continue execution.  
 
-First, `a` and `b` must be sorted based on whether they are even or odd as future operations may depend on division truncating.
+First, `a` and `b` must be sorted based on whether they are even or odd as future operations will depend on division truncating.  
+In particular, when divided by 2, then multiplied with 2, odd numbers will suffer from losing 1 due to truncation.  
+Thus, these edge cases must be taken care of first by providing a certain base offset of 0,1,2 as shown in the pseudocode below:  
 
     a /= 2;  
     b /= 2;  
-    mem[0]=pc;     //give mem[0] initial value like 2  
+    mem[0]=pc; //always  
 
     if ( a and b are even) {  
-    mem[1]=0;        // result  
+        mem[1]=0;  
     } else if ( a and b are odd ) {  
-                  mem[1]=2;        // result  
+        mem[1]=2;  
     } else {  
-                  mem[1]=2;        // result  
+        mem[1]=1;  
     }  
 
 Then, the 5 steps outlined above will be done in order: 
 
     //0-a/2  
     location1 = pc; //save initial PC address  
-    mem[pc]=pc+3;             //populate with mem[pc],mem[pc+1],mem[pc+2]  
+    mem[pc]=pc+3;      //populate with mem[pc],mem[pc+1],mem[pc+2]  
     mem[pc+1]=pc+4;  
     mem[pc+2]=pc+5;  
-    mem[mem[pc]]=0;       // the value at mem[pc] is 0  
+    mem[mem[pc]]=0;    // the value at mem[pc] is 0  
     mem[mem[pc+1]]=a;  // the value at mem[pc+1] is a   
-    mem[mem[pc+2]]= pc+6;        //the value is for next PC  
-    //result mem[mem[pc]] is -a  
-    //mem[0] = mem[mem[pc+2]]; //update current PC value  
-    
+
     //0-a/2-a/2  
     pc+=6;  
     location2 = pc;  
     mem[pc]=mem[location1];     //mem[location1] is actually -a  
     mem[pc+1]=pc+3;  
-    mem[mem[pc+1]]=a;  
-    // result mem[mem[pc]] is -2a  
-    mem[pc+2]=pc+4;  
-    mem[mem[pc+2]]=pc+5;          //new pc  
-    //mem[0] = mem[mem[pc+2]];   
+    mem[mem[pc+1]]=a;
+    mem[pc+2]=pc+4;
     
     //0-a/2-a/2-b/2  
     pc+=5;  
@@ -93,8 +89,7 @@ Then, the 5 steps outlined above will be done in order:
     mem[pc]=mem[location1];  
     mem[pc+1]=pc+3;  
     mem[pc+2]=pc+4;  
-    mem[mem[pc+1]]=b;  
-    mem[mem[pc+2]]=pc+5;          //new pc  
+    mem[mem[pc+1]]=b;
     
     //0-a/2=a/2-b/2-b/2  
     pc+=5;  
@@ -115,8 +110,9 @@ Then, the 5 steps outlined above will be done in order:
     pc+=3; //update PC  
     mem[pc]=100; //trigger out of bounds exception  
 
-Thus, the resulting array for the sum operation will be of the form:  
+Thus, based on the pseudocode above, the resulting array for the sum operation should be of the form:  
 `2,0,5,6,7,0,a/2,5,10,11,a/2,5,14,15,b/2,5,18,19,b/2,1,5,2,100`
+with the necessary truncation offsets mentioned previously.
 
   
 ## References  
