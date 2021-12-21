@@ -40,8 +40,17 @@ public class StarCPU {
         catch (Exception e){
             return memory[1];
         }
+        finally {
+            System.out.println("************");
+            for(int i=0; i<memory.length; i++){
+                System.out.println(memory[i] + " ");
 
-        return memory[1];
+            }
+
+            return memory[1];
+        }
+
+
 
     }
 
@@ -53,6 +62,11 @@ public class StarCPU {
      */
     public static int[] addProgram(int a, int b) {
         int[] memory = new int[] {2,0,5,6,7,0,a/2,5,10,11,a/2,5,14,15,b/2,5,18,19,b/2,1,5,2,100};
+
+        for(int i=0; i<memory.length; i++){
+            System.out.println(memory[i] + " ");
+
+        }
 
         if(a%2 == 0 && b%2 == 0){
             memory[1] = 0;
