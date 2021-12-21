@@ -114,7 +114,7 @@ Thus, based on the pseudocode above, the resulting array for the sum operation s
 `2,0,5,6,7,0,a/2,5,10,11,a/2,5,14,15,b/2,5,18,19,b/2,1,5,2,100`  
 with the necessary truncation offsets mentioned previously.
 
-## Example Operation and Testing   
+## Example Operation and Testing  
 An example of the CPU modifying the memory would be an operation `3+6`.  
 The produced array would be {2,0,5,6,7,0,1,5,10,11,1,5,14,15,3,5,18,19,3,1,5,2}.  
 The modified array (after the operation) would be {22,9,5,6,7,-8,1,5,10,11,1,5,14,15,3,5,18,19,3,1,5,2,100}.  
