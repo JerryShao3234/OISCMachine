@@ -1,5 +1,6 @@
-## A Simple OISC CPU
+# A Simple OISC CPU
 
+## Introduction:
 In this lab I have built an OISC (One-instruction set computer) simulator. An OISC is perhaps the simplest CPU implementation in existence, even more so than RISCs (Reduced-instruction set computers).
 A OISC is a type of CPU architecture that executes programs using a single instruction, and if implemented correctly, is theoretically capable of running any program designed for any other CPU. These types of CPUs
 are implemented in a Hardware Description Language like Verilog or VHDL. However, for this case,
@@ -8,11 +9,12 @@ a high level software language like Java will be chosen to simulate the operatio
 In this case, the CPU is modelled for
 Cryptoleq, which is a language consisting of just one instruction, subleq, known in Assembly as `subl`. 
   
-As a reminder, subleq is defined as:  
+As a reminder, subleq is defined as:
+
     `subl a, b, c:`  
     `memory[b] = memory[b] - memory[a]`  
-    `if (memory[b] <= 0) goto c`  
-  
+    `if (memory[b] <= 0) goto c`
+## Design Principle:
 Cryptoleq is able to modify specific memory cells
 using direct and multiple layers of indirect addressing. The general idea implemented in this design is:
 
@@ -25,6 +27,7 @@ At each clock cycle or time step, the CPU uses three memory addresses, `memory[p
 
 The CPU stops execution when there is an attempt to read a value outside the bounds of the memory array, and when this happens the value at `memory[1]` is returned as the output of whatever "program" was being executed.
 
+## Implementation:
 Let us analyze the implementation in Java. In the `StarCPU` class are two methods: `simulate()` and `addProgram(int a, int b)`.  
 The `simulate()` method is quite straightforward as it is just an implementation of the pseudocode mentioned above. Given a "program" (implemented as an int array), the method will simulate the CPU until it stops (i.e. triggered an out of bounds execption).
 
@@ -34,9 +37,5 @@ The method writes a "program" (again, an int array) to calculate the output of t
 Using the operation of the CPU defined above, one can hardcode the contents of the program array such that the program returns the correct sum after the CPU stops by intentionally triggering the exception.  
 
 
-Of course, this is a simulation done in Java, which is not a Turing-complete model in any sense. However, to demonstrate,
-I have written a Java program that writes a Cryptoleq program (expressed as an array) to execute a very simple operation:
-the addition of two numbers, i.e. `a+b`.
-To make things more interesting, the memory cells themselves are limited in such a way that the initial state of the program
-can never contain any element greater than `max(a,b,100)`.
-We will see how a trivial operation in computers is done in CPU architecture in a OISC machine.
+Of course, this is a simulation done in Java, which is not a Turing-complete model in any sense.  
+## References:
