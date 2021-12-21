@@ -11,25 +11,6 @@ public class StarCPU {
      * @return the output when execution terminates
      */
     public static int simulate(int[] memory) {
-        /*int pc = memory[0];
-
-        while(memory[0]+2 < memory.length){ //pc+2?
-            try{
-                memory[0] = memory[0];
-                memory[memory[memory[0]]] = memory[memory[memory[0]]] - memory[memory[memory[0]+1]];
-                if(memory[memory[memory[0]]] <= 0){
-                    memory[0] = memory[memory[0]+2];
-                }
-                else {
-                    memory[0] = memory[0] + 3;
-                }
-
-            }
-            catch(Exception ArrayIndexOutOfBounds){
-                return memory[1];
-            }
-        }
-        return memory[1];*/
 
         try {
             while(memory[0] < memory.length) {

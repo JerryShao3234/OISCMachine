@@ -25,6 +25,13 @@ At each clock cycle or time step, the CPU uses three memory addresses, `memory[p
 
 The CPU stops execution when there is an attempt to read a value outside the bounds of the memory array, and when this happens the value at `memory[1]` is returned as the output of whatever "program" was being executed.
 
+Let us analyze the implementation in Java. In the `StarCPU` class are two methods: `simulate()` and `addProgram(int a, int b)`.  
+The `simulate()` method is quite straightforward as it is just an implementation of the pseudocode mentioned above. Given a "program" (implemented as an int array), the method will simulate the CPU until it stops (i.e. triggered an out of bounds execption).    
+The `addProgram(int a, int b)` method is also straightforward but time consuming to write, and is almost completely hardcoded for the addition operation.  
+The method writes a "program" (again, an int array) to calculate the output of two ints, `a` and `b`.  
+Using the operation of the CPU defined above, one can hardcode the contents of the program array such that the program returns the correct sum after the CPU stops by intentionally triggering the exception.  
+
+
 Of course, this is a simulation done in Java, which is not a Turing-complete model in any sense. However, to demonstrate,
 I have written a Java program that writes a Cryptoleq program (expressed as an array) to execute a very simple operation:
 the addition of two numbers, i.e. `a+b`.
