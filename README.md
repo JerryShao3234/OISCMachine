@@ -111,7 +111,7 @@ Then, the 5 steps outlined above will be done in order:
     mem[pc]=100; //trigger out of bounds exception  
 
 Thus, based on the pseudocode above, the resulting array for the sum operation should be of the form:  
-`2,0,5,6,7,0,a/2,5,10,11,a/2,5,14,15,b/2,5,18,19,b/2,1,5,2,100`
+`2,0,5,6,7,0,a/2,5,10,11,a/2,5,14,15,b/2,5,18,19,b/2,1,5,2,100`  
 with the necessary truncation offsets mentioned previously.
 
   
