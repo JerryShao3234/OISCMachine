@@ -7,6 +7,7 @@ a high level software language like Java will be chosen to simulate the operatio
 
 In this case, the CPU is modelled for
 Cryptoleq, which is a language consisting of just one instruction, subleq, known in Assembly as `subl`. 
+  
 As a reminder, subleq is defined as:  
 `subl a, b, c:
 memory[b] = memory[b] - memory[a]
