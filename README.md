@@ -38,4 +38,6 @@ Using the operation of the CPU defined above, one can hardcode the contents of t
 
 
 Of course, this is a simulation done in Java, which is not a Turing-complete model in any sense.  
-## References:
+## References:  
+https://www.youtube.com/watch?v=o0e7_U7ZmBM&t=1068s  
+https://www.sccs.swarthmore.edu/users/06/adem/engin/e25/finale/  
