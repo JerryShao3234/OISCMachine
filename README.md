@@ -6,7 +6,13 @@ are implemented in a Hardware Description Language like Verilog or VHDL. However
 a high level software language like Java will be chosen to simulate the operation of such a machine.
 
 In this case, the CPU is modelled for
-Cryptoleq, which is a language consisting of just one instruction, subleq, known in Assembly as `subl`. Cryptoleq is able to modify specific memory cells
+Cryptoleq, which is a language consisting of just one instruction, subleq, known in Assembly as `subl`. 
+As a reminder, subleq is defined as:
+`subl a, b, c:
+memory[b] = memory[b] - memory[a]
+if (memory[b] <= 0) goto c
+`
+Cryptoleq is able to modify specific memory cells
 using direct and multiple layers of indirect addressing. The general idea implemented in this design is:
 
 The CPU accesses a memory region defined by the `int` array `memory`, with `N` entries. The program counter, `pc`, is always `memory[0]` and this location of memory holds the next address to process.
