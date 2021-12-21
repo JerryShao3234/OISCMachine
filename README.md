@@ -9,10 +9,10 @@ In this case, the CPU is modelled for
 Cryptoleq, which is a language consisting of just one instruction, subleq, known in Assembly as `subl`. 
   
 As a reminder, subleq is defined as:  
-`subl a, b, c:  
-memory[b] = memory[b] - memory[a]  
-if (memory[b] <= 0) goto c  
-`  
+`subl a, b, c:`  
+`memory[b] = memory[b] - memory[a]`  
+`if (memory[b] <= 0) goto c`  
+  
 Cryptoleq is able to modify specific memory cells
 using direct and multiple layers of indirect addressing. The general idea implemented in this design is:
 
